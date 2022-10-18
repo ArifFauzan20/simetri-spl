@@ -118,6 +118,9 @@
                 </div>
             </div>
         </div>
+        <div class="row">
+            <div class="nam">{{ Auth()->user()->karyawan->nama_karyawan }}</div>
+        </div>
     </section>
     <script src="/assets/vendors/simple-datatables/simple-datatables.js"></script>
     <script src="/assets/js/vendors.js"></script>

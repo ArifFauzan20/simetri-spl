@@ -7,6 +7,7 @@ use App\Http\Controllers\Koordinator\ApprovalController;
 use App\Http\Controllers\Koordinator\KoordinatorController;
 use App\Http\Controllers\Koordinator\PDFViewController;
 use App\Http\Controllers\Koordinator\PengajuanLemburController;
+use App\Http\Controllers\Koordinator\DataPengajuanKoordinatorController;
 use App\Http\Controllers\Labour\LabourController;
 use App\Http\Controllers\SuperAdmin\DivisionsController;
 use App\Http\Controllers\SuperAdmin\EmployeeController;
@@ -180,6 +181,12 @@ Route::group(['middleware' => ['koordinator']], function () {
 
     Route::get('koordinator/export/pdf/{id}', [PDFViewController::class, 'index'])->name('export.pdf');
     Route::get('koordinator/export/get-pdf/{id}', [PDFViewController::class, 'getPDF'])->name('export.get-pdf');
+
+    Route::get('koordinator/data-pengajuan/export-exel', [DataPengajuanKoordinatorController::class, 'export'])->name('koordinator.export');
+    Route::get('koordinator/data-pengajuan/export-exel1', [DataPengajuanKoordinatorController::class, 'exportOne'])->name('koordinator.export-one');
+    Route::get('koordinator/data-pengajuan/get-employee', [DataPengajuanKoordinatorController::class, 'findEmployee'])->name('koordinator.find-employee');
+
+
 });
 
 Route::group(['middleware' => ['labour']], function () {
