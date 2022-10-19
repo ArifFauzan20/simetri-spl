@@ -138,7 +138,7 @@
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">Export Data Perorangan Excel</h5>
-                    <form action="/koordinator/data-pengajuan/export-exel1" method="GET">
+                    <form action="/koordinator/data-pengajuan/exportKoordinator" method="GET">
                         @csrf
                         <div class="row">
                             <div class="col-md-6 mb-2">
@@ -154,8 +154,8 @@
                                     </select>
                                 </div> --}}
                                 <div class="form-group">
-                                    <label for="" class="mb-2">{{ Auth()->user()->karyawan->nik_karyawan }}</label>
-                                    <input type="text" class="form-control" name="nik" id="nik">
+                                    <label for="" class="mb-2">{{ Auth()->user()->karyawan->nama_karyawan }}</label>
+                                    <input type="text" class="form-control" name="updated_by" id="updated_by" >
                                 </div>
                             </div>
                         </div>

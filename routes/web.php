@@ -184,6 +184,7 @@ Route::group(['middleware' => ['koordinator']], function () {
 
     Route::get('koordinator/data-pengajuan/export-exel', [DataPengajuanKoordinatorController::class, 'export'])->name('koordinator.export');
     Route::get('koordinator/data-pengajuan/export-exel1', [DataPengajuanKoordinatorController::class, 'exportOne'])->name('koordinator.export-one');
+    Route::get('koordinator/data-pengajuan/exportKoordinator', [DataPengajuanKoordinatorController::class, 'exportKoordinator'])->name('koordinator.exportKoordinator');
     Route::get('koordinator/data-pengajuan/get-employee', [DataPengajuanKoordinatorController::class, 'findEmployee'])->name('koordinator.find-employee');
 
 

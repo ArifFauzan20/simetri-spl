@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Koordinator;
 
 use App\Exports\DetailSplExport;
 use App\Exports\SingleKaryawanExport;
+use App\Exports\SingleKaryawanKoordinator;
 use App\Http\Controllers\Controller;
 use App\Models\Karyawan;
 use Carbon\Carbon;
@@ -64,6 +65,15 @@ class DataPengajuanKoordinatorController extends Controller
         $sdate = $request->sdate;
         $edate = $request->edate;
         return Excel::download(new SingleKaryawanExport($sdate, $edate, $nik), 'SPL' . ' ' . $nik . '-' . Carbon::parse($sdate)->format('d-M-Y') . '-' . Carbon::parse($edate)->format('d-M-Y') .  '.xlsx');
+    }
+
+    public function exportKoordinator(Request $request)
+    {
+        // $nik = $request->nik;
+        $updated_by = $request->updated_by;
+        $sdate = $request->sdate;
+        $edate = $request->edate;
+        return Excel::download(new SingleKaryawanKoordinator($sdate, $edate, $updated_by), 'SPL' . ' ' . $updated_by . '-' . Carbon::parse($sdate)->format('d-M-Y') . '-' . Carbon::parse($edate)->format('d-M-Y') .  '.xlsx');
     }
 }
 
