@@ -19,6 +19,7 @@
                                 <th>ID SPL</th>
                                 <th>Kode Proyek</th>
                                 <th>Nama Proyek</th>
+                                <th>Nama Koordinator</th>
                                 <th>Tanggal Pengajuan</th>
                                 <th>Tanggal Lembur</th>
                                 <th>Bagian</th>
@@ -34,6 +35,7 @@
                                     <td>{{ $data->id_spl }}</td>
                                     <td>{{ $data->kode_proyek }}</td>
                                     <td>{{ $data->nama_proyek }}</td>
+                                    <td>{{ $data->updated_by }}</td>
                                     <td>{{ Carbon\Carbon::parse($data->tgl_pengajuan)->format('d/m/Y') }}</td>
                                     <td>{{ \Carbon\Carbon::parse($data->tgl_lembur)->format('d/m/Y') }}</td>
                                     @foreach ($bagian as $item)
