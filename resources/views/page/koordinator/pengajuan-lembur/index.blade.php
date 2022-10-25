@@ -181,33 +181,6 @@
                     </form>
                 </div>
             </div>
-            {{-- <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Export Data Group</h5>
-                    <form action="/koordinator/data-pengajuan/export-exel" method="GET">
-                        @csrf
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="sdate">Start date</label>
-                                    <input type="date" class="form-control" name="sdate" id="sdate">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="edate">End date</label>
-                                    <input type="date" class="form-control" name="edate" id="edate">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <button type="submit" class="btn btn-danger">Download</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div> --}}
         </div>
         @include('sweetalert::alert')
     </div>

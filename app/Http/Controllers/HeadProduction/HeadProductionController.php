@@ -385,8 +385,11 @@ class HeadProductionController extends Controller
     }
 
     // show all data function
-    public function showData()
+    public function showData(Request $request)
     {
+        $updated_by = $request->updated_by; 
+        $sdate = $request->sdate; 
+        // $edate = $request->sdate;
 
         $bagian = Bagian::all();
 
@@ -396,6 +399,8 @@ class HeadProductionController extends Controller
                 ->select('t_spl.id', 't_spl.id_spl', 't_spl.kode_proyek', 't_spl.nama_proyek', 't_approval.status', 't_spl.tgl_pengajuan', 't_spl.keterangan', 't_detail_spl.updated_by',  't_spl.updated_by_bagian', 't_spl.updated_by_bagian', 't_approval.tgl_approval_manager', 't_spl.tgl_lembur','t_spl.updated_by')
                 ->join('t_detail_spl', 't_spl.id', '=', 't_detail_spl.spl_id')
                 ->join('t_approval', 't_spl.id', '=', 't_approval.spl_id')
+                ->where('t_spl.updated_by', 'like', '%'.$updated_by.'%')
+                ->where('t_spl.tgl_lembur', 'like', '%'.$sdate.'%')
                 ->where('t_spl.updated_by_bagian', '6')
                 ->orWhere('t_spl.updated_by_bagian', '2')
                 ->groupBy('t_spl.id', 't_spl.id_spl', 't_spl.kode_proyek', 't_spl.nama_proyek', 't_approval.status', 't_spl.tgl_pengajuan', 't_spl.keterangan', 't_detail_spl.updated_by',  't_spl.updated_by_bagian', 't_approval.tgl_approval_manager', 't_spl.tgl_lembur','t_spl.updated_by')
@@ -416,15 +421,17 @@ class HeadProductionController extends Controller
                 ->select('t_spl.id', 't_spl.id_spl', 't_spl.kode_proyek', 't_spl.nama_proyek', 't_approval.status', 't_spl.tgl_pengajuan', 't_spl.keterangan', 't_detail_spl.updated_by',  't_spl.updated_by_bagian', 't_spl.updated_by_bagian', 't_approval.tgl_approval_manager', 't_spl.tgl_lembur', 't_spl.updated_by')
                 ->join('t_detail_spl', 't_spl.id', '=', 't_detail_spl.spl_id')
                 ->join('t_approval', 't_spl.id', '=', 't_approval.spl_id')
+                ->where('t_spl.updated_by', 'like', '%'.$updated_by.'%')
+                ->where('t_spl.tgl_lembur', 'like', '%'.$sdate.'%')
                 ->where('t_spl.updated_by_bagian', '10')
                 ->orWhere('t_spl.updated_by_bagian', '12')
                 ->orWhere('t_spl.updated_by_bagian', '13')
                 ->orWhere('t_spl.updated_by_bagian', '27')
                 ->orWhere('t_spl.updated_by_bagian', '8')
                 ->groupBy('t_spl.id', 't_spl.id_spl', 't_spl.kode_proyek', 't_spl.nama_proyek', 't_approval.status', 't_spl.tgl_pengajuan', 't_spl.keterangan', 't_detail_spl.updated_by',  't_spl.updated_by_bagian', 't_approval.tgl_approval_manager', 't_spl.tgl_lembur', 't_spl.updated_by')
-                ->orderBy('t_approval.status', 'desc')
+                ->orderBy('t_approval.status')
                 ->orderBy('t_spl.id', 'desc')
-                ->get();
+                ->latest()->get();
             return view('page.headproduction.data-pengajuan.index', [
                 'title' => 'Data Pengajuan Lembur',
                 'header' => 'Data Pengajuan Lembur'
@@ -436,6 +443,8 @@ class HeadProductionController extends Controller
                 ->select('t_spl.id', 't_spl.id_spl', 't_spl.kode_proyek', 't_spl.nama_proyek', 't_approval.status', 't_spl.tgl_pengajuan', 't_spl.keterangan', 't_detail_spl.updated_by',  't_spl.updated_by_bagian', 't_spl.updated_by_bagian', 't_approval.tgl_approval_manager', 't_spl.tgl_lembur','t_spl.updated_by')
                 ->join('t_detail_spl', 't_spl.id', '=', 't_detail_spl.spl_id')
                 ->join('t_approval', 't_spl.id', '=', 't_approval.spl_id')
+                ->where('t_spl.updated_by', 'like', '%'.$updated_by.'%')
+                ->where('t_spl.tgl_lembur', 'like', '%'.$sdate.'%')
                 ->whereNot('t_spl.updated_by_bagian', '6')
                 ->whereNot('t_spl.updated_by_bagian', '2')
                 ->whereNot('t_spl.updated_by_bagian', '10')
@@ -453,6 +462,78 @@ class HeadProductionController extends Controller
             ], compact('data_approval', 'bagian'));
         }
     }
+    // show all data function
+    // public function CariData(Request $request)
+    // {
+    //     $updated_by = $request->updated_by; 
+    //     $sdate = $request->sdate; 
+    //     $edate = $request->sdate; 
+
+    //     $bagian = Bagian::all();
+
+    //     // show data by bagian PPIC
+    //     if (auth()->user()->karyawan->bagian->id == 2) {
+    //         $data_approval = DB::table('t_spl')
+    //             ->select('t_spl.id', 't_spl.id_spl', 't_spl.kode_proyek', 't_spl.nama_proyek', 't_approval.status', 't_spl.tgl_pengajuan', 't_spl.keterangan', 't_detail_spl.updated_by',  't_spl.updated_by_bagian', 't_spl.updated_by_bagian', 't_approval.tgl_approval_manager', 't_spl.tgl_lembur','t_spl.updated_by')
+    //             ->join('t_detail_spl', 't_spl.id', '=', 't_detail_spl.spl_id')
+    //             ->join('t_approval', 't_spl.id', '=', 't_approval.spl_id')
+    //             ->where('t_spl.updated_by_bagian', '6')
+    //             ->orWhere('t_spl.updated_by_bagian', '2')
+    //             ->groupBy('t_spl.id', 't_spl.id_spl', 't_spl.kode_proyek', 't_spl.nama_proyek', 't_approval.status', 't_spl.tgl_pengajuan', 't_spl.keterangan', 't_detail_spl.updated_by',  't_spl.updated_by_bagian', 't_approval.tgl_approval_manager', 't_spl.tgl_lembur','t_spl.updated_by')
+    //             ->orderBy('t_approval.status', 'desc')
+    //             ->orderBy('t_spl.id', 'desc')
+    //             ->get();
+    //         return view('page.headproduction.data-pengajuan.index', [
+    //             'title' => 'Data Pengajuan Lembur',
+    //             'header' => 'Data Pengajuan Lembur'
+    //         ], compact('data_approval', 'bagian'));
+    //     }
+
+
+    //     // show data by bagian WO / production
+    //     // id 10, 12, 13, 27
+    //     if (auth()->user()->karyawan->bagian->id == 8) {
+    //         $data_approval = DB::table('t_spl')
+    //             ->select('t_spl.id', 't_spl.id_spl', 't_spl.kode_proyek', 't_spl.nama_proyek', 't_approval.status', 't_spl.tgl_pengajuan', 't_spl.keterangan', 't_detail_spl.updated_by',  't_spl.updated_by_bagian', 't_spl.updated_by_bagian', 't_approval.tgl_approval_manager', 't_spl.tgl_lembur', 't_spl.updated_by')
+    //             ->join('t_detail_spl', 't_spl.id', '=', 't_detail_spl.spl_id')
+    //             ->join('t_approval', 't_spl.id', '=', 't_approval.spl_id')
+    //             ->where('t_spl.updated_by_bagian', '10')
+    //             ->orWhere('t_spl.updated_by_bagian', '12')
+    //             ->orWhere('t_spl.updated_by_bagian', '13')
+    //             ->orWhere('t_spl.updated_by_bagian', '27')
+    //             ->orWhere('t_spl.updated_by_bagian', '8')
+    //             ->groupBy('t_spl.id', 't_spl.id_spl', 't_spl.kode_proyek', 't_spl.nama_proyek', 't_approval.status', 't_spl.tgl_pengajuan', 't_spl.keterangan', 't_detail_spl.updated_by',  't_spl.updated_by_bagian', 't_approval.tgl_approval_manager', 't_spl.tgl_lembur', 't_spl.updated_by')
+    //             ->orderBy('t_approval.status', 'desc')
+    //             ->orderBy('t_spl.id', 'desc')
+    //             ->get();
+    //         return view('page.headproduction.data-pengajuan.index', [
+    //             'title' => 'Data Pengajuan Lembur',
+    //             'header' => 'Data Pengajuan Lembur'
+    //         ], compact('data_approval', 'bagian'));
+    //     }
+
+    //     if (auth()->user()->karyawan->bagian->id != 2 && auth()->user()->karyawan->bagian->id != 8) {
+    //         $data_approval = DB::table('t_spl')
+    //             ->select('t_spl.id', 't_spl.id_spl', 't_spl.kode_proyek', 't_spl.nama_proyek', 't_approval.status', 't_spl.tgl_pengajuan', 't_spl.keterangan', 't_detail_spl.updated_by',  't_spl.updated_by_bagian', 't_spl.updated_by_bagian', 't_approval.tgl_approval_manager', 't_spl.tgl_lembur','t_spl.updated_by')
+    //             ->join('t_detail_spl', 't_spl.id', '=', 't_detail_spl.spl_id')
+    //             ->join('t_approval', 't_spl.id', '=', 't_approval.spl_id')
+    //             ->whereNot('t_spl.updated_by_bagian', '6')
+    //             ->whereNot('t_spl.updated_by_bagian', '2')
+    //             ->whereNot('t_spl.updated_by_bagian', '10')
+    //             ->whereNot('t_spl.updated_by_bagian', '12')
+    //             ->whereNot('t_spl.updated_by_bagian', '13')
+    //             ->whereNot('t_spl.updated_by_bagian', '27')
+    //             ->whereNot('t_spl.updated_by_bagian', '8')
+    //             ->groupBy('t_spl.id', 't_spl.id_spl', 't_spl.kode_proyek', 't_spl.nama_proyek', 't_approval.status', 't_spl.tgl_pengajuan', 't_spl.keterangan', 't_detail_spl.updated_by',  't_spl.updated_by_bagian', 't_approval.tgl_approval_manager', 't_spl.tgl_lembur','t_spl.updated_by')
+    //             ->orderBy('t_approval.status', 'desc')
+    //             ->orderBy('t_spl.id', 'desc')
+    //             ->get();
+    //         return view('page.headproduction.data-pengajuan.index', [
+    //             'title' => 'Data Pengajuan Lembur',
+    //             'header' => 'Data Pengajuan Lembur'
+    //         ], compact('data_approval', 'bagian'));
+    //     }
+    // }
 
     // show detail data function
     public function detail($id)

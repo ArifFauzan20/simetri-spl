@@ -12,7 +12,47 @@
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">Data Pengajuan</h5>
-                    <table class="table table-striped" id="table1">
+                    <form action="" method="GET">
+                        <div class="row mb-2 ms-2">
+                            <div class="col-md-2 mt-4 ms-1">
+                                <label for="">Masukkan Nama Koordinator per Bagian</label>
+                            </div>
+                            <div class="col-md-1 mt-4 ms-4">
+                                <label for="">:</label>
+                            </div>
+                            <div class="col-md-2 mt-4 ms-4">
+                                <input type="text" class="form-control" name="updated_by" value="{{ old('updated_by') }}">
+                            </div>
+                            {{-- <div class="col-md-3">
+                                <input type="date" class="form-control" name="edate" value="{{ old('edate') }}">
+                            </div> --}}
+                            {{-- <div class="col-md-3">
+                                <div class="row">
+                                    <div class="col">
+                                        <input type="date" class="form-control" name="sdate" value="{{ old('sdate') }}" placeholder="Masukkan Start Date">
+                                    </div>
+                                    <div class="col">
+                                        <input type="date" class="form-control" name="edate" value="{{ old('edate') }}" placeholder="Masukkan End Date">
+                                    </div>
+                                </div>
+                            </div> --}}
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2 mt-2 ms-4">
+                                <label for="">Masukkan Tanggal Lembur</label>
+                            </div>
+                            <div class="col-md-1 mt-2 ms-4">
+                                <label for="">:</label>
+                            </div>
+                            <div class="col-md-2 mt-2 ms-3">
+                                <input type="date" class="form-control" name="sdate" value="{{ old('sdate') }}">
+                            </div>
+                        </div>
+                        <div class="col-md-2 mt-2 ms-4 mb-2">
+                            <input type="submit" value="cari" class="btn btn-danger">
+                        </div>
+                    </form>
+                    <table class="table" id="table1">
                         <thead class="text-dark">
                             <tr>
                                 <th>No</th>
