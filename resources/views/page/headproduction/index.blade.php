@@ -5,17 +5,7 @@
     </header>
     <section>
         <div class="row">
-            <div class="col-md-3 col-xl-3">
-                <div class="card">
-                    <div class="card-body bg-primary">
-                        <h2 class="card-title text-white fs-2">
-                            {{ $total }}
-                            <i class="bi bi-filetype-doc fs-3"></i>
-                        </h2>
-                        <h5 class="card-title text-white fs-6">Total Pengajuan</h5>
-                    </div>
-                </div>
-            </div>
+            
             <div class="col-md-3 col-xl-3">
                 <div class="card">
                     <div class="card-body bg-success">
@@ -46,6 +36,17 @@
                             <i class="bi bi-filetype-doc fs-3"></i>
                         </h2>
                         <h5 class="card-title text-white fs-6">Waiting Head</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-xl-3">
+                <div class="card">
+                    <div class="card-body bg-primary">
+                        <h2 class="card-title text-white fs-2">
+                            {{ $total }}
+                            <i class="bi bi-filetype-doc fs-3"></i>
+                        </h2>
+                        <h5 class="card-title text-white fs-6">Total Transaksi</h5>
                     </div>
                 </div>
             </div>

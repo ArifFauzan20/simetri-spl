@@ -9,7 +9,7 @@
                             {{ $total }}
                             <i class="bi bi-filetype-doc fs-3"></i>
                         </h2>
-                        <h5 class="card-title text-white fs-6">Total Pengajuan</h5>
+                        <h5 class="card-title text-white fs-6">Total Transaksi</h5>
                     </div>
                 </div>
             </div>
@@ -118,9 +118,9 @@
                 </div>
             </div>
         </div>
-        <div class="row">
+        {{-- <div class="row">
             <div class="nam">{{ Auth()->user()->karyawan->nama_karyawan }}</div>
-        </div>
+        </div> --}}
     </section>
     <script src="/assets/vendors/simple-datatables/simple-datatables.js"></script>
     <script src="/assets/js/vendors.js"></script>

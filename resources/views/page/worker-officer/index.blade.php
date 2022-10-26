@@ -12,7 +12,7 @@
                             {{ $total }}
                             <i class="bi bi-filetype-doc fs-3"></i>
                         </h2>
-                        <h5 class="card-title text-white fs-6">Total Pengajuan</h5>
+                        <h5 class="card-title text-white fs-6">Total Transaksi</h5>
                     </div>
                 </div>
             </div>
