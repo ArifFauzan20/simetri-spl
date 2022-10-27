@@ -4,7 +4,7 @@
         <h1 class="mb-3">Selamat Datang, {{ Auth()->user()->karyawan->nama_karyawan }}</h1>
     </header>
     <section>
-        <div class="row">
+        {{-- <div class="row">
             <div class="col-md-3 col-xl-3">
                 <div class="card">
                     <div class="card-body bg-primary">
@@ -49,7 +49,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
         <div class="row">
             <div class="col-md-12 col-xl-8">
                 <div class="card">
