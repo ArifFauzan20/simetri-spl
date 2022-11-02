@@ -144,7 +144,7 @@
                             <div class="col-md-12 d-flex gap-2 justify-content-end">
                                 <a href="{{ route('koordinator.data-pengajuan') }}" class="btn btn-light">Kembali</a>
                                 <button type="button" class="btn btn-add" data-bs-toggle="modal"
-                                    data-bs-target="#sendApproval">Kirim</button>
+                                    data-bs-target="#sendApproval" id="btn" onclick="Function()">Kirim</button>
                             </div>
                         </div>
 
@@ -175,7 +175,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-light" data-bs-dismiss="modal">Kembali</button>
-                            <button type="submit" class="btn btn-primary">Kirim</button>
+                            <button type="submit" class="btn btn-primary" id="btn" onclick="Function()">Kirim</button>
                         </div>
 
                     </div>
@@ -187,4 +187,10 @@
     <script src="/assets/js/vendors.js"></script>
     <script src="/assets/vendors/choices.js/choices.min.js"></script>
     <script src="/assets/js/superadmin/edituser.js"></script>
+    <script>
+        function Function() {
+            var x = document.getElementById("btn");
+            x.disabled = true;
+        }
+    </script>
 @endsection
