@@ -29,7 +29,7 @@ class HeadProductionController extends Controller
                 ->join('t_detail_spl', 't_spl.id', '=', 't_detail_spl.spl_id')
                 ->join('t_approval', 't_spl.id', '=', 't_approval.spl_id')
                 ->where('t_spl.updated_by_bagian', '6')
-                ->orWhere('t_spl.updated_by_bagian', '2')
+                ->orwhere('t_spl.updated_by_bagian', '2')
                 ->groupBy('t_spl.id', 't_spl.id_spl', 't_spl.kode_proyek', 't_spl.nama_proyek', 't_approval.status', 't_spl.tgl_pengajuan', 't_spl.keterangan', 't_detail_spl.updated_by',  't_spl.updated_by_bagian', 't_approval.tgl_approval_manager', 't_spl.tgl_lembur')
                 ->orderBy('t_approval.status', 'desc')
                 ->orderBy('t_spl.id', 'desc')

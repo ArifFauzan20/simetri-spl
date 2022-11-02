@@ -10,7 +10,6 @@ use App\Models\Spl;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use PhpParser\Node\Stmt\Else_;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class SupervisorController extends Controller
@@ -33,140 +32,13 @@ class SupervisorController extends Controller
             ->orderBy('t_spl.id_spl', 'desc')
             ->distinct()
             ->get();
-        $approval = Approval::with('spl')
-            ->where('updated_by', 'KABUL MUKTIONO')
-            ->where('status', '2')->get();
-        // $waiting_spv = DB::table('t_approval')
-        //     ->join('t_spl', 't_approval.spl_id', '=', 't_spl.id')
-        //     ->where('t_approval.status', '5')
-        //     ->where('t_spl.updated_by_bagian', auth()->user()->karyawan->bagian->bagian_id)
-        //     ->count();
-        if(auth()->user()->karyawan->bagian->id == 26) {
-            $waiting_spv = DB::table('t_approval')
-                    ->join('t_spl', 't_approval.spl_id', '=', 't_spl.id')
-                    ->where(
-                        [
-                            ['t_approval.status', '5'],
-                            ['t_spl.updated_by_bagian', '26'], //DL QC
-                        ]
-                    )
-                    ->count();
-        } elseif (auth()->user()->karyawan->bagian->id == 16){
-            $waiting_spv = DB::table('t_approval')
-                    ->join('t_spl', 't_approval.spl_id', '=', 't_spl.id')
-                    ->where(
-                        [
-                            ['t_approval.status', '5'],
-                            ['t_spl.updated_by_bagian', '16'], //SECURITY
-                        ]
-                    )
-                    ->count();
-        } elseif (auth()->user()->karyawan->bagian->id == 16){
-            $waiting_spv = DB::table('t_approval')
-                    ->join('t_spl', 't_approval.spl_id', '=', 't_spl.id')
-                    ->where(
-                        [
-                            ['t_approval.status', '5'],
-                            ['t_spl.updated_by_bagian', '12'], //DL LISTRIK
-                        ]
-                    )
-                    ->count();
-        } elseif (auth()->user()->karyawan->bagian->id == 5){
-            $waiting_spv = DB::table('t_approval')
-                    ->join('t_spl', 't_approval.spl_id', '=', 't_spl.id')
-                    ->where(
-                        [
-                            ['t_approval.status', '5'],
-                            ['t_spl.updated_by_bagian', '5'], //FINANCE
-                        ]
-                    )
-                    ->count();
-        } elseif (auth()->user()->karyawan->bagian->id == 18){
-            $waiting_spv = DB::table('t_approval')
-                    ->join('t_spl', 't_approval.spl_id', '=', 't_spl.id')
-                    ->where(
-                        [
-                            ['t_approval.status', '5'],
-                            ['t_spl.updated_by_bagian', '18'], //TECHNICAL ENGINEERING
-                        ]
-                    )
-                    ->count();
-        } elseif (auth()->user()->karyawan->bagian->id == 25){
-            $waiting_spv = DB::table('t_approval')
-                    ->join('t_spl', 't_approval.spl_id', '=', 't_spl.id')
-                    ->where(
-                        [
-                            ['t_approval.status', '5'],
-                            ['t_spl.updated_by_bagian', '25'], //TEKNISI TUGAS LUAR
-                        ]
-                    )
-                    ->count();
-        } elseif (auth()->user()->karyawan->bagian->id == 17){
-            $waiting_spv = DB::table('t_approval')
-                    ->join('t_spl', 't_approval.spl_id', '=', 't_spl.id')
-                    ->where(
-                        [
-                            ['t_approval.status', '5'],
-                            ['t_spl.updated_by_bagian', '17'], //DESIGN EGINEERING
-                        ]
-                    )
-                    ->count();
-        } elseif (auth()->user()->karyawan->bagian->id == 2){
-            $waiting_spv = DB::table('t_approval')
-                    ->join('t_spl', 't_approval.spl_id', '=', 't_spl.id')
-                    ->where(
-                        [
-                            ['t_approval.status', '5'],
-                            ['t_spl.updated_by_bagian', '2'], //PPIC
-                        ]
-                    )
-                    ->count();
-        } elseif (auth()->user()->karyawan->bagian->id == 27){
-            $waiting_spv = DB::table('t_approval')
-                    ->join('t_spl', 't_approval.spl_id', '=', 't_spl.id')
-                    ->where(
-                        [
-                            ['t_approval.status', '5'],
-                            ['t_spl.updated_by_bagian', '27'], //DL CAT
-                        ]
-                    )
-                    ->count();
-        } elseif (auth()->user()->karyawan->bagian->id == 10){
-            $waiting_spv_mekanik = DB::table('t_approval')
-                    ->join('t_spl', 't_approval.spl_id', '=', 't_spl.id')
-                    ->where(
-                        [
-                            ['t_approval.status', '5'],
-                            ['t_spl.updated_by_bagian', '10'], //DL MEKANIK
-                        ]
-                    )
-                    ->count();
-            $waiting_spv_elektromekanik = DB::table('t_approval')
-                    ->join('t_spl', 't_approval.spl_id', '=', 't_spl.id')
-                    ->where(
-                        [
-                            ['t_approval.status', '5'],
-                            ['t_spl.updated_by_bagian', '13'], //DL ELEKTROMEKANIK
-                        ]
-                    )
-                    ->count();
-            $waiting_spv = $waiting_spv_mekanik + $waiting_spv_elektromekanik;
-        } elseif (auth()->user()->karyawan->bagian->id == 6){
-            $waiting_spv = DB::table('t_approval')
-                    ->join('t_spl', 't_approval.spl_id', '=', 't_spl.id')
-                    ->where(
-                        [
-                            ['t_approval.status', '5'],
-                            ['t_spl.updated_by_bagian', '6'], //WAREHOUSE
-                        ]
-                    )
-                    ->count();
-        } 
+        $approval = Approval::with('spl')->where('status', '2')->get();
+        $waiting_spv = DB::table('t_approval')
+            ->where('status', '5')
+            ->count();
 
         $waiting_head = DB::table('t_approval')
-            ->join('t_spl', 't_approval.spl_id', '=', 't_spl.id')
             ->where('status', '6')
-            ->where('t_spl.updated_by_bagian', '26')
             ->count();
 
         $pengajuan_terakhir = DB::table('t_spl')
